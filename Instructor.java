@@ -9,11 +9,9 @@ public class Instructor implements User {
     static HashMap<String, String> assessment = new HashMap<>();
     static HashMap<String, String> lecture = new HashMap<>();
     static HashMap<String, String> comments = new HashMap<>();
-
     static Scanner sc = new Scanner(System.in);
     static Instructor ins = new Instructor();
 
-    private String ID;
     static String uploadedBy;
 
     @Override
@@ -25,17 +23,18 @@ public class Instructor implements User {
 
     }
 
-    public String getID() {
-        return ID;
+    static {
 
-    }
+        // System.out.print("choose ID: ");
+        // ins.ID = sc.nextLine();
 
-    public void setID(String ID) {
+        String ins0, ins1;
+        ins0 = "I0";
+        ins1 = "I1";
 
-        System.out.print("choose ID: ");
-        this.ID = sc.nextLine();
-        this.ID = ID;
-        inst.put("I" + this.ID, this.ID);
+        inst.put(ins0, "0");
+        inst.put(ins1, "1");
+
     }
 
     static class addLectureMaterial {
@@ -45,34 +44,34 @@ public class Instructor implements User {
         String nofSlides;
 
         public void addLectureVideo() {
-            System.out.print("Enter Topic of Video: ");
+            System.out.print("\nEnter Topic of Video: ");
             this.videoTopic = sc.nextLine();
-            System.out.print("Enter filename of Video:  ");
-            this.videoName = sc.nextLine();
+            System.out.print("\nEnter filename of Video:  ");
+            this.videoName = sc.nextLine() + ".mp4";
 
-            lecture.put(ins.ID + " video Topic ", videoTopic);
-            lecture.put(ins.ID + " video Name ", videoName);
-            lecture.put("uploaded by", ins.ID);
+            lecture.put(InstructorMenu.ID + " video Topic ", videoTopic);
+            lecture.put(InstructorMenu.ID + " video Name ", videoName);
+            lecture.put(" uploaded by", InstructorMenu.ID);
             ins.uploadTime();
 
         }
 
         public void addLectureSlides() {
-            System.out.print(" Enter Topic of Slides: ");
+            System.out.print(" \nEnter Topic of Slides: ");
             this.slidesTopic = sc.nextLine();
-            System.out.print(" Enter no of Slides: ");
+            System.out.print("\n Enter no of Slides: ");
             this.nofSlides = sc.nextLine();
 
-            lecture.put(ins.ID + " Topic Slide ", slidesTopic);
-            lecture.put(ins.ID + " Number of Slide ", nofSlides);
+            lecture.put(InstructorMenu.ID + " Topic Slide ", slidesTopic);
+            lecture.put(InstructorMenu.ID + " Number of Slide ", nofSlides);
 
             for (int i = 1; i <= Integer.parseInt(nofSlides); i++) {
-                System.out.print(" Content of Slide " + i + " : ");
+                System.out.print("\nContent of Slide " + i + " : ");
                 String content = sc.nextLine();
-                lecture.put(ins.ID + " content of slide " + i, content);
+                lecture.put(InstructorMenu.ID + " content of slide " + i, content);
 
             }
-            lecture.put("uploaded by", ins.ID);
+            lecture.put("uploaded by", InstructorMenu.ID);
             ins.uploadTime();
 
         }
@@ -87,15 +86,15 @@ public class Instructor implements User {
         int quizMarks = 1;
 
         void addAssignments() {
-            System.out.print("Enter Assignment Problem Statement: ");
+            System.out.print("\nEnter Assignment Problem Statement: ");
             this.probStatement = sc.nextLine();
             System.out.print("\n Enter max marks: ");
             marks = sc.nextLine();
 
-            assessment.put(ins.ID + " assignment max marks", marks);
+            assessment.put(InstructorMenu.ID + " assignment max marks", marks);
 
-            assessment.put(ins.ID + " assignment Problem ", probStatement);
-            assessment.put("uploaded by", ins.ID);
+            assessment.put(InstructorMenu.ID + " assignment Problem ", probStatement);
+            assessment.put("uploaded by", InstructorMenu.ID);
             ins.uploadTime();
 
         }
@@ -103,8 +102,8 @@ public class Instructor implements User {
         void addQuizes() {
             System.out.print("\nEnter Quiz Question:  ");
             this.quizQuestion = sc.nextLine();
-            assessment.put(ins.ID + " Quiz Question ", probStatement);
-            assessment.put("uploaded by", ins.ID);
+            assessment.put(InstructorMenu.ID + " Quiz Question ", probStatement);
+            assessment.put("uploaded by", InstructorMenu.ID);
             ins.uploadTime();
         }
 
@@ -116,7 +115,7 @@ public class Instructor implements User {
 
     void closeAssignments() {
         String quizQuestion = sc.nextLine();
-        assessment.remove(ins.ID + quizQuestion);
+        assessment.remove(InstructorMenu.ID + quizQuestion);
         System.out.println("\n Deadline ended....");
         System.out.print("Assignment closed...");
 
@@ -124,47 +123,46 @@ public class Instructor implements User {
 
     @Override
     public void addComments() {
-        System.out.print("Enter Comment: ");
+        System.out.print("\nEnter Comment: ");
         String comment = sc.nextLine();
-        System.out.print("      " + uploadTime());
+        System.out.println("      " + uploadTime());
 
-        comments.put(ins.ID + " comment ", comment + "    " + uploadTime());
+        comments.put(InstructorMenu.ID + " comment ", comment + "    " + uploadTime());
 
     }
 
     @Override
     public void viewComments() {
-        comments.entrySet();
+        System.out.print(comments.entrySet());
     }
 
     @Override
     public void login(String ID) {
 
-        if (inst.containsValue(ID))
-            System.out.print("Welcome " + "I" + ID);
+        if (inst.containsValue(ID)) {
+            System.out.println("Welcome " + "I" + ID);
 
-        else
-            System.out.print("Wrong choice.....Try Again");
-        __BackPack__.selectRole();
+            // else
+            // System.out.print("Wrong choice.....Try Again");
+        }
 
     }
 
     @Override
     public void logout() {
-        while (true) {
-            break;
-        }
+        System.out.println("logging out.........");
+
     }
 
     @Override
     public void viewAssessments() {
-        assessment.entrySet();
+        System.out.println(assessment.entrySet());
 
     }
 
     @Override
     public void viewLectureMaterial() {
-        lecture.entrySet();
+        System.out.println(lecture.entrySet());
     }
 
 }

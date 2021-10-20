@@ -4,58 +4,58 @@ import java.util.*;
 
 public class __BackPack__ {
 
-    // static {
-
-    // }
-
     static int selectRole;
 
     public static void selectRole() {
-        System.out.print("Select your Role----");
+        System.out.print("Select your Role : ");
 
-        do {
-            selectRole = sc.nextInt();
-        } while (selectRole >= 1 || selectRole <= 3);
+        selectRole = sc.nextInt();
+
     }
 
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        System.out.print("............Welcome to BACK-PACK................");
-        System.out.print("1.Enter as Instructor");
-        System.out.print("2.Enter as Student");
-        System.out.print("Exit");
+        label:
 
-        // for (int i=0;i<=instructorArray.size();i++){
+        while (true) {
 
-        // }
+            System.out.println("\n............Welcome to BACK-PACK................");
+            System.out.println("   1.Enter as Instructor");
+            System.out.println("   2.Enter as Student");
+            System.out.println("   3.Exit");
 
-        selectRole();
-        if (1 <= selectRole || selectRole <= 3) {
-            while (true) {
+            selectRole();
+            if (1 <= selectRole || selectRole <= 3) {
+
                 switch (selectRole) {
 
-                    case 1:
+                case 1:
 
-                    {
-                        InstructorMenu.main(args);
-                    }
+                    InstructorMenu.main(args);
 
-                        break;
+                    break label;
 
-                    case 2:
-                        StudentMenu.main(args);
+                case 2:
+                    StudentMenu.main(args);
 
-                        break;
+                    break label;
 
-                    case 3:
+                case 3:
 
-                        break;
+                    System.exit(1);
 
                 }
-            }
-        }
 
+            }
+
+            else {
+                System.out.print("wrong choice .... try again");
+                __BackPack__.main(args);
+            }
+
+        }
     }
+
 }

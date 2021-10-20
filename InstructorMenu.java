@@ -11,24 +11,29 @@ public class InstructorMenu {
     static Instructor ins = new Instructor();
     static addLectureMaterial material = new addLectureMaterial();
     static addAssessments assessments = new addAssessments();
+    static String ID;
 
     static void instructorMenu() {
+        label: while (true) {
 
-        System.out.println("""
-                .............INSTRUCTOR MENU............
+            System.out.println();
+            System.out.println("""
+                    .............INSTRUCTOR MENU............
 
-                           1. Add Lecture material
-                           2. Add assessments
-                           3. View lecture materials
-                           4. View assessments
-                           5. Grade assessments
-                           6. Close assessment
-                           7. View comments
-                           8. Add comments
-                           9. Logout""");
+                            1. Add Lecture material
+                            2. Add assessments
+                            3. View lecture materials
+                            4. View assessments
+                            5. Grade assessments
+                            6. Close assessment
+                            7. View comments
+                            8. Add comments
+                            9. Logout
+                                        """);
 
-        int selInsMenu = sc.nextInt();
-        switch (selInsMenu) {
+            int selInsMenu = sc.nextInt();
+
+            switch (selInsMenu) {
 
             case 1:
                 // add lectur materials
@@ -39,13 +44,14 @@ public class InstructorMenu {
                 System.out.print("which material you want to add:");
                 int m = sc.nextInt();
                 System.out.println();
+
                 switch (m) {
-                    case 1:
-                        material.addLectureSlides();
-                        break;
-                    case 2:
-                        material.addLectureVideo();
-                        break;
+                case 1:
+                    material.addLectureSlides();
+                    break;
+                case 2:
+                    material.addLectureVideo();
+                    break;
 
                 }
                 break;
@@ -60,7 +66,8 @@ public class InstructorMenu {
                 System.out.print("which material you want to add:");
                 m = sc.nextInt();
                 System.out.println();
-                switch (m) {
+                while (true) {
+                    switch (m) {
                     case 1:
                         assessments.addAssignments();
 
@@ -71,19 +78,18 @@ public class InstructorMenu {
 
                         break;
 
+                    }
+                    break;
                 }
-                break;
 
             case 3:
                 // view Assessments
                 ins.viewAssessments();
-
                 break;
 
             case 4:
                 // view Lectures
                 ins.viewLectureMaterial();
-
                 break;
 
             case 5:
@@ -111,11 +117,36 @@ public class InstructorMenu {
                 ins.logout();
                 break;
 
+            }
+
         }
     }
 
     public static void main(String[] args) {
 
-        String selectInsID = ins.getID();
+        System.out.println("""
+                    0-I0
+                    1-I1
+                """);
+
+        System.out.println("choose id: ");
+        String chooseID = sc.nextLine();
+        ins.login(chooseID);
+        ID = "I" + chooseID;
+        int selectInsID = Integer.parseInt(chooseID);
+        label: while (true) {
+            switch (selectInsID) {
+
+            case 0:
+                instructorMenu();
+                break label;
+
+            case 1:
+                instructorMenu();
+                break label;
+
+            }
+
+        }
     }
 }

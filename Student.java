@@ -9,6 +9,15 @@ public class Student implements User {
     static HashMap<String, String> subass = new HashMap<>();
 
     void submitAssessments() {
+        stu.viewAssessments();
+        String assName;
+        String assessmentID;
+        System.out.println();
+        System.out.print("\nEnter ID of Assessment :");
+        assessmentID = sc.nextLine();
+        System.out.print("Enter Assessment name: ");
+        assName = sc.nextLine() + "_" + StudentMenu.ID + ".zip";
+        subass.put(assName + " ", assessmentID);
 
     }
 
@@ -17,9 +26,9 @@ public class Student implements User {
     }
 
     static Scanner sc = new Scanner(System.in);
-    static Student stu = new Student();;
+    static Student stu = new Student();
 
-    private String ID;
+    String ID;
 
     @Override
     public Date uploadTime() {
@@ -30,17 +39,20 @@ public class Student implements User {
 
     }
 
-    public String getID() {
-        return ID;
-
-    }
-
-    public void setID(String ID) {
+    static {
 
         System.out.print("choose ID: ");
-        this.ID = sc.nextLine();
-        this.ID = ID;
-        student.put("S" + this.ID, this.ID);
+        stu.ID = sc.nextLine();
+
+        String stu0, stu1, stu2;
+        stu0 = "S0";
+        stu1 = "S1";
+        stu2 = "S2";
+
+        student.put(stu0, "0");
+        student.put(stu1, "1");
+        student.put(stu2, "2");
+
     }
 
     @Override
@@ -49,13 +61,13 @@ public class Student implements User {
         String comment = sc.nextLine();
         System.out.print("      " + uploadTime());
 
-        Instructor.comments.put(stu.ID + " comment ", comment + "    " + uploadTime());
+        Instructor.comments.put(StudentMenu.ID + " comment ", comment + "    " + uploadTime());
 
     }
 
     @Override
     public void viewComments() {
-        Instructor.comments.entrySet();
+        System.out.print(Instructor.comments.entrySet());
     }
 
     @Override
@@ -66,26 +78,23 @@ public class Student implements User {
 
         else
             System.out.print("Wrong choice.....Try Again");
-        __BackPack__.selectRole();
 
     }
 
     @Override
     public void logout() {
-        while (true) {
-            break;
-        }
+        System.out.println("logging out.........");
     }
 
     @Override
     public void viewAssessments() {
-        Instructor.assessment.entrySet();
+        System.out.println(Instructor.assessment.entrySet());
 
     }
 
     @Override
     public void viewLectureMaterial() {
-        Instructor.lecture.entrySet();
+        System.out.println(Instructor.lecture.entrySet());
     }
 
 }
